@@ -26,61 +26,59 @@
 </head>
 
 <body>
-
-    <main class="login form">
+    <main>
         <!-- Login Section Start -->
-        <div class=" w-full max-w-[440px] mx-auto bg-white rounded-3xl drop-shadow-sm p-4 md:p-8 my-10 flex flex-col items-center">
+        <div class="w-full max-w-[440px] mx-auto flex flex-col bg-white rounded-3xl drop-shadow-sm p-4 md:p-8 my-6 items-center">
             <div class="text-center mb-2">
-                <img src="./assets/github-logo.png" alt="GitHub Logo" class="w-16 h-16 mx-auto mb-4">
-                <h1 class="text-2xl font-semibold text-[#24292e] tracking-tight">GitHub Issues Tracker</h1>
-                <p class="text-slate-400 text-base font-medium">Sign in to manage your issues</p>
+                <img class="w-auto mx-auto mb-4" src="./assets/github-logo.png" alt="logo">
+                <h1 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h1>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
             </div>
 
             <form class="w-full space-y-5">
-                <div class="form-control w-full">
+                <div class="w-full">
                     <label class="label px-0 pt-0 pb-2">
                         <span class="label-text text-[14px] font-semibold text-slate-700">Username</span>
                     </label>
-                    <input id="user-filed" type="text" placeholder="Enter Username"
+                    <input id="userName" type="text" placeholder="Enter Username"
                         class="input input-bordered w-full bg-white border-slate-200 focus:outline-none focus:border-[#424243] rounded-md placeholder:text-slate-400  shadow-sm" />
                     <label class="label px-0 pt-1 pb-0">
                         <span class="text-sm font-semibold text-[#4A00FF]">Default: admin</span>
                     </label>
                 </div>
-
-                <div class="form-control w-full">
+                <div class="w-full">
                     <label class="label px-0 pt-0 pb-2">
                         <span class="label-text text-[14px] font-semibold text-slate-700">Password</span>
                     </label>
-                    <input id="password-filed" type="password" placeholder="Enter Password"
+                    <input id="password" type="password" placeholder="Enter Password"
                         class="input input-bordered w-full bg-white border-slate-200 focus:outline-none focus:border-[#424243] rounded-md placeholder:text-slate-400  shadow-sm" />
                     <label class="label px-0 pt-1 pb-0">
                         <span class="text-sm font-semibold text-[#4A00FF]">Default: admin123</span>
                     </label>
                 </div>
-
-                <button id="login" type="button"
-                    class="btn w-full h-10 bg-[#4A00FF] hover:bg-[#520dc2] text-white border-none normal-case text-base font-medium rounded-md shadow-md transition-all">
+                <button id="loginBtn" type="button" class="btn btn-primary w-full">
                     Sign In
                 </button>
             </form>
             <!-- Login Section End -->
 
            <!-- Footer Section -->
-            <div class="divider my-5 text-slate-400 font-bold text-sm before:bg-slate-100 after:bg-slate-100">OR</div>
+            <div class="divider my-5 text-slate-400 font-bold text-sm">OR</div>
             <div class="w-full text-center">
-                <p class="text-slate-400 text-base mb-4 font-medium">Demo Credentials:</p>
-                <div class="bg-[#f8f9fb] rounded-xl p-8 border border-slate-50 flex flex-col gap-1">
-                    <p class="text-slate-700 text-lg">
+                <p class="text-[#64748B] text-[14px] mb-5">Demo Credentials:</p>
+                <div class="bg-[#F8FAFC] flex flex-col gap-1 rounded-2xl p-4 border border-slate-500">
+                    <p class="text-slate-700 text-sm">
                         <span class="font-semibold">Username:</span> admin
                     </p>
-                    <p class="text-slate-700 text-lg">
+                    <p class="text-slate-700 text-sm">
                         <span class="font-semibold">Password:</span> admin123
                     </p>
                 </div>
             </div>
         </div>
     </main>
+
+    <script src="./login.js"></script>
 </body>
 
 </html>
