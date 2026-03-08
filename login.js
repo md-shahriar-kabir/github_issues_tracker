@@ -6,7 +6,7 @@ const password = document.getElementById("password").value;
 
 if (userName === "admin" && password === "admin123") {
 
-window.location.href = "dashboard.html";
+window.location.href = "main.html";
 
 } else {
 
