@@ -131,7 +131,7 @@ async function showIssueDetails(id) {
             medium: "bg-yellow-100 text-yellow-600",
             low: "bg-gray-200 text-gray-600"
         };
-    const statusColor = issue.status === "open" ? "bg-green-400 text-white" : "bg-red-400 text-white";
+    const statusColor = issue.status === "open" ? "bg-green-500 text-white" : "bg-red-600 text-white";
     
     document.getElementById("modalContent").innerHTML = `
 
