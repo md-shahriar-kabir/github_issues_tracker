@@ -120,6 +120,7 @@ function searchIssue() {
         .then(res => res.json())
         .then(data => displayIssues(data.data))
 }
+
 async function showIssueDetails(id) {
     const res =
         await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
@@ -186,7 +187,6 @@ async function showIssueDetails(id) {
             </div>
 
 `
-
     document.getElementById("issueModal").showModal()
 
 }
