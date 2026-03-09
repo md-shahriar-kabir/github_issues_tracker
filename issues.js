@@ -57,16 +57,16 @@ function displayIssues(issues) {
         if (issue.labels && issue.labels.length > 0) {
             labelsHTML = issue.labels.map(label => {
                 if (label.toLowerCase() === "bug") {
-                    return `<span class="badge badge-error">bug</span>`
+                    return `<span class="badge badge-error"><i class="fa-solid fa-bug"></i>bug</span>`
                 }
                 if (label.toLowerCase() === "documentation") {
-                    return `<span class="badge badge-info">documentation</span>`
+                    return `<span class="badge badge-info"><i class="fa-brands fa-readme"></i>documentation</span>`
                 }
                 if (label.toLowerCase() === "help wanted") {
-                    return `<span class="badge badge-warning">help wanted</span>`
+                    return `<span class="badge badge-warning"><i class="fa-brands fa-files-pinwheel"></i>help wanted</span>`
                 }
                 if (label.toLowerCase() === "enhancement") {
-                    return `<span class="badge badge-success">enhancement</span>`
+                    return `<span class="badge badge-success"><i class="fa-solid fa-wand-magic-sparkles"></i>enhancement</span>`
                 }
                 if (label.toLowerCase() === "good first issue") {
                     return `<span class="badge badge-accent">good first issue</span>`
@@ -78,7 +78,7 @@ function displayIssues(issues) {
 
         const card = document.createElement("div");
         card.innerHTML = `
-        <div onclick="showIssueDetails(${issue.id})" class="bg-white p-5 rounded-xl shadow border-t-4 ${border} cursor-pointer hover:shadow-lg transition">
+        <div onclick="showIssueDetails(${issue.id})" class="bg-white p-3 rounded-xl shadow border-t-4 ${border} cursor-pointer hover:shadow-lg transition">
             <div class="flex justify-between mb-3">
                 ${badgeIcon.icon}
                 <span class="text-xs px-3 py-1 rounded-full ${priorityColor[issue.priority]}">
@@ -91,7 +91,7 @@ function displayIssues(issues) {
             <p class="text-gray-500 text-sm mb-3 truncate">
                     ${issue.description}
             </p>
-            <div class="flex gap-2 mb-3 ">
+            <div class="flex gap-2 mb-3">
                     ${labelsHTML}
             </div>
             <div class="divider"></div>
@@ -154,27 +154,27 @@ async function showIssueDetails(id) {
     };
 
     let labelsHTML = "";
-        if (issue.labels && issue.labels.length > 0) {
-            labelsHTML = issue.labels.map(label => {
-                if (label.toLowerCase() === "bug") {
-                    return `<span class="badge badge-error">bug</span>`
-                }
-                if (label.toLowerCase() === "documentation") {
-                    return `<span class="badge badge-info">documentation</span>`
-                }
+    if (issue.labels && issue.labels.length > 0) {
+        labelsHTML = issue.labels.map(label => {
+            if (label.toLowerCase() === "bug") {
+                return `<span class="badge badge-error"><i class="fa-solid fa-bug"></i>bug</span>`
+            }
+            if (label.toLowerCase() === "documentation") {
+                return `<span class="badge badge-info"><i class="fa-brands fa-readme"></i>documentation</span>`
+            }
 
-                if (label.toLowerCase() === "help wanted") {
-                    return `<span class="badge badge-warning">help wanted</span>`
-                }
-                if (label.toLowerCase() === "enhancement") {
-                    return `<span class="badge badge-success">enhancement</span>`
-                }
-                if (label.toLowerCase() === "good first issue") {
-                    return `<span class="badge badge-accent">good first issue</span>`
-                }
-                return `<span class="badge badge-success">${label}</span>`
-            }).join("")
-        }
+            if (label.toLowerCase() === "help wanted") {
+                return `<span class="badge badge-warning"><i class="fa-brands fa-files-pinwheel"></i>help wanted</span>`
+            }
+            if (label.toLowerCase() === "enhancement") {
+                return `<span class="badge badge-success"><i class="fa-solid fa-wand-magic-sparkles"></i>enhancement</span>`
+            }
+            if (label.toLowerCase() === "good first issue") {
+                return `<span class="badge badge-accent"><i class="fa-solid fa-medal"></i>good first issue</span>`
+            }
+            return `<span class="badge badge-success">${label}</span>`
+        }).join("")
+    }
 
     const statusColor = issue.status === "open" ? "bg-green-500 text-white" : "bg-red-600 text-white";
 
