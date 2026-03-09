@@ -21,40 +21,64 @@ function displayIssues(issues) {
     const container = document.getElementById("issuesContainer");
     container.innerHTML = "";
     if (issues.length === 0) {
-    container.innerHTML = `
+        container.innerHTML = `
     <div class="col-span-full flex flex-col items-center justify-center bg-white rounded-xl border border-gray-100 py-12 px-6 text-center">
       <i class="fa-regular fa-face-frown text-6xl text-slate-300 mb-4"></i>
       <h3 class="text-xl font-bold text-slate-700 mb-2">No issues found</h3>
       <p class="text-slate-400 text-sm">Try searching with a different keyword.</p>
     </div>
   `;
-    return;
-  }
+        return;
+    }
     issues.forEach(issue => {
-    const border = issue.status === "open" ? "border-green-500" : "border-purple-500";
-    const badgeIcon =
-      issue.status === "open" ?
-         {
-            icon: `
+        const border = issue.status === "open" ? "border-green-500" : "border-purple-500";
+        const badgeIcon =
+            issue.status === "open" ?
+                {
+                    icon: `
             <div class="w-7 h-7 flex items-center justify-center text-green-500 bg-green-100 rounded-full">
             <img src="./assets/Open-Status.png" alt="">
             </div>
         `,
-          }
-        : {
-            icon: `
+                }
+                : {
+                    icon: `
           <div class="w-7 h-7 flex items-center justify-center text-purple-500 bg-purple-100 rounded-full">
             <img src="./assets/Closed-Status.png" alt=""></div>
         `,
-          };
-    const priorityColor = {
+                };
+        const priorityColor = {
             high: "bg-red-100 text-red-600",
             medium: "bg-yellow-100 text-yellow-600",
             low: "bg-gray-200 text-gray-600"
         };
 
-    const card = document.createElement("div");
-    card.innerHTML = `
+        let labelsHTML = "";
+        if (issue.labels && issue.labels.length > 0) {
+            labelsHTML = issue.labels.map(label => {
+                if (label.toLowerCase() === "bug") {
+                    return `<span class="badge badge-error">bug</span>`
+                }
+                if (label.toLowerCase() === "documentation") {
+                    return `<span class="badge badge-info">documentation</span>`
+                }
+                if (label.toLowerCase() === "help wanted") {
+                    return `<span class="badge badge-warning">help wanted</span>`
+                }
+                if (label.toLowerCase() === "enhancement") {
+                    return `<span class="badge badge-success">enhancement</span>`
+                }
+                if (label.toLowerCase() === "good first issue") {
+                    return `<span class="badge badge-accent">good first issue</span>`
+                }
+                return `<span class="badge badge-success">${label}</span>`
+
+            }).join("")
+
+        }
+
+        const card = document.createElement("div");
+        card.innerHTML = `
         <div onclick="showIssueDetails(${issue.id})" class="bg-white p-5 rounded-xl shadow border-t-4 ${border} cursor-pointer hover:shadow-lg transition">
             <div class="flex justify-between mb-3">
                 ${badgeIcon.icon}
@@ -69,8 +93,7 @@ function displayIssues(issues) {
                     ${issue.description}
             </p>
             <div class="flex gap-2 mb-3 ">
-                    <span class="badge badge-error">${issue.labels[0]}</span>
-                    <span class="badge badge-warning">${issue.labels[1]}</span>
+                    ${labelsHTML}
             </div>
             <div class="divider"></div>
             <div class="flex justify-between mb-3">
@@ -91,7 +114,7 @@ function displayIssues(issues) {
             </div>    
         </div>
     `
-    container.appendChild(card)
+        container.appendChild(card)
     })
 }
 
@@ -127,12 +150,36 @@ async function showIssueDetails(id) {
     const data = await res.json()
     const issue = data.data
     const priorityColor = {
-            high: "bg-red-100 text-red-600",
-            medium: "bg-yellow-100 text-yellow-600",
-            low: "bg-gray-200 text-gray-600"
-        };
+        high: "bg-red-100 text-red-600",
+        medium: "bg-yellow-100 text-yellow-600",
+        low: "bg-gray-200 text-gray-600"
+    };
+
+    let labelsHTML = "";
+        if (issue.labels && issue.labels.length > 0) {
+            labelsHTML = issue.labels.map(label => {
+                if (label.toLowerCase() === "bug") {
+                    return `<span class="badge badge-error">bug</span>`
+                }
+                if (label.toLowerCase() === "documentation") {
+                    return `<span class="badge badge-info">documentation</span>`
+                }
+
+                if (label.toLowerCase() === "help wanted") {
+                    return `<span class="badge badge-warning">help wanted</span>`
+                }
+                if (label.toLowerCase() === "enhancement") {
+                    return `<span class="badge badge-success">enhancement</span>`
+                }
+                if (label.toLowerCase() === "good first issue") {
+                    return `<span class="badge badge-accent">good first issue</span>`
+                }
+                return `<span class="badge badge-success">${label}</span>`
+            }).join("")
+        }
+
     const statusColor = issue.status === "open" ? "bg-green-500 text-white" : "bg-red-600 text-white";
-    
+
     document.getElementById("modalContent").innerHTML = `
 
             <h2 class="text-2xl font-bold mb-4">
@@ -150,12 +197,7 @@ async function showIssueDetails(id) {
                 </span>
             </div>
             <div class="flex gap-2 mb-5">
-                <span class="badge badge-error">
-                    ${issue.labels[0]}
-                </span>
-                <span class="badge badge-warning">
-                    ${issue.labels[1]}
-                </span>
+                    ${labelsHTML}
             </div>
             <p class="text-gray-600 mb-6">
                 ${issue.description}
