@@ -1,18 +1,18 @@
-const issuesApi = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
+const issuesApi = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
 let allIssues = [];
 
 async function loadIssues() {
-    showSpinner(true)
+    showSpinner(true);
     const res = await fetch(issuesApi)
     const data = await res.json()
     allIssues = data.data
-    displayIssues(allIssues)
-    showSpinner(false)
+    displayIssues(allIssues);
+    showSpinner(false);
 }
 
 function showSpinner(state) {
-    const spinner = document.getElementById("spinner")
+    const spinner = document.getElementById("spinner");
     state ? spinner.classList.remove("hidden") : spinner.classList.add("hidden")
 }
 
@@ -74,7 +74,6 @@ function displayIssues(issues) {
                 return `<span class="badge badge-success">${label}</span>`
 
             }).join("")
-
         }
 
         const card = document.createElement("div");
@@ -83,7 +82,7 @@ function displayIssues(issues) {
             <div class="flex justify-between mb-3">
                 ${badgeIcon.icon}
                 <span class="text-xs px-3 py-1 rounded-full ${priorityColor[issue.priority]}">
-                    ${issue.priority}
+                    ${issue.priority.toUpperCase()}
                 </span>
             </div>
             <h2 class="font-semibold text-lg mb-2 truncate">
@@ -137,7 +136,7 @@ function setActive(btn) {
 }
 
 function searchIssue() {
-    const text = document.getElementById("searchInput").value
+    const text = document.getElementById("searchInput").value;
 
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`)
         .then(res => res.json())
@@ -145,8 +144,7 @@ function searchIssue() {
 }
 
 async function showIssueDetails(id) {
-    const res =
-        await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
     const data = await res.json()
     const issue = data.data
     const priorityColor = {
@@ -196,12 +194,12 @@ async function showIssueDetails(id) {
                     • ${issue.createdAt}
                 </span>
             </div>
-            <div class="flex gap-2 mb-5">
+                <div class="flex gap-2 mb-5">
                     ${labelsHTML}
-            </div>
-            <p class="text-gray-600 mb-6">
-                ${issue.description}
-            </p>
+                </div>
+                <p class="text-gray-600 mb-6">
+                    ${issue.description}
+                </p>
         <div class="bg-gray-100 p-4 rounded-lg flex justify-between">
             <div>
                 <p class="text-gray-500 text-sm">
@@ -216,7 +214,7 @@ async function showIssueDetails(id) {
                     Priority:
                 </p>
                 <span class="px-3 py-1 rounded-full ${priorityColor[issue.priority]} text-l">
-                    ${issue.priority}
+                    ${issue.priority.toUpperCase()}
                 </span>
             </div>
         </div>
